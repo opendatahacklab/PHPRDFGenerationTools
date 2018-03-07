@@ -2,7 +2,7 @@
 /**
  * Helper class to create an ontology serialized as RDFXML
  * 
- * Copyright 2016 Cristiano Longo
+ * Copyright 2018 Cristiano Longo
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -108,6 +108,18 @@ class RDFXMLOntology{
 		$subPropertyElement->setAttribute('rdf:resource',$p2);
 	}
 	
+	/**
+	 * Create an individual of the specified type and add it to the ontology.
+	 *
+	 * @return the created xml element
+	 */
+	public function addIndividual($type, $iri){
+		$xmlElement=$this->xmlDocument->createElement($type);
+		$about=$xmlElement->setAttribute('rdf:about',$iri);
+		$this->xmlDocument->documentElement->appendChild($xmlElement);
+		return $xmlElement;
+	}
+
 	/**
 	 * Get the xml document
 	 */

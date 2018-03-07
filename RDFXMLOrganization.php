@@ -78,4 +78,13 @@ class RDFXMLOrganization{
 		$this->xmlElement->appendChild($suborgElement);
 		$suborgElement->setAttribute('rdf:resource',$parentOrganizationIri);
 	}
+
+	/**
+	 * Add a reference to a page about this organization
+	 */
+	public function addWebPage($pageUri){
+		$pageElement = $this->xmlDocument->createElement('foaf:page');
+		$this->xmlElement->appendChild($pageElement);
+		$pageElement->setAttribute('rdf:resource',$pageUri);		
+	}
 }
