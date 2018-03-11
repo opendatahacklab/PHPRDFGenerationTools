@@ -115,13 +115,14 @@ class RDFXMLEARLTestResult{
 	/**
 	 * Create a empty istance of earl:TestResult
 	 *
-	 * @param $datetime DateTime
+	 * @param $datetime DateTime when  object the test has been performed
 	 */
-	function __construct($ontology, $iri,$outcomeiri){
+	function __construct($ontology, $iri,$outcomeiri,$datetime){
 		$this->ontology=$ontology;
 		$this->xmlElement=$ontology->addIndividual('earl:TestResult',$iri);
 		$this->iri=$iri;
 		$this->setOutcome($outcomeiri);
+		$this->setDate(isset($datetime) ? $datetime : new DateTime());
 	}
 
 	/**
@@ -134,6 +135,14 @@ class RDFXMLEARLTestResult{
 		$this->outcomeiri=$outcomeiri;
    	}
 
+	private function setDate($date){
+		$xml=$this->ontology->getXML();
+		$propertyEl=$xml->createElement('dct:date');
+		$this->xmlElement->appendChild($propertyEl);
+		$propertyEl->setAttribute('rdf:type','http://www.w3.org/2001/XMLSchema#date');
+		$dateEl=$xml->createTextNode($date->format('Y-m-d'));
+		$propertyEl->appendChild($dateEl);
+	}
 	/**
 	 * Return true if the test is passed
 	 */
