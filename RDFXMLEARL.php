@@ -139,7 +139,7 @@ class RDFXMLEARLTestResult{
 		$xml=$this->ontology->getXML();
 		$propertyEl=$xml->createElement('dct:date');
 		$this->xmlElement->appendChild($propertyEl);
-		$propertyEl->setAttribute('rdf:type','http://www.w3.org/2001/XMLSchema#date');
+		$propertyEl->setAttribute('rdf:datatype','http://www.w3.org/2001/XMLSchema#date');
 		$dateEl=$xml->createTextNode($date->format('Y-m-d'));
 		$propertyEl->appendChild($dateEl);
 	}
